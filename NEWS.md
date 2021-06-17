@@ -1,12 +1,32 @@
 **Packages NEWS and Updates**
 ============
 
+**nortsTest 1.0.1 Date: 17/06/2021**
+----------------------------------
+
+### Features:
+
+- Add GPL-2 license.
+
+### Changes:
+
+- False discovery rate set as default for the random projections test
+
+- Change "NA %in$ y" to "anyNA(y)"
+
+- use match.args() function for more flexibility
+
+### Fixes:
+
+- Bug fix for the False discovery rate.
+
+
 **nortsTest 1.0.0 Date: 08/07/2020**
 ----------------------------------
 
 ### Fixes:
 
-- Big fix for CRAN submission.
+- Bug fix for CRAN submission.
 
 
 **nortsTest 1.0.0 Date: 12/06/2020**
@@ -14,7 +34,7 @@
 
 ### Fixes:
 
-- Big fix for CRAN submission.
+- Bug fix for CRAN submission.
 
 
 **nortsTest 1.0.0 Date: 09/05/2020**
