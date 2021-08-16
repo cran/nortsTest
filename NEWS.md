@@ -1,6 +1,21 @@
 **Packages NEWS and Updates**
 ============
 
+**nortsTest 1.0.3 Date: 12/06/2021**
+----------------------------------
+
+### Features:
+
+### Changes:
+
+### Fixes:
+- Fix documentation.
+- Update p-values mixing method using a False discovery rates, and Benjamin and 
+  Yekuteli (2001) procedures.
+- update the random projections procedure for the rp.test.
+
+----------------------------------
+
 **nortsTest 1.0.1 Date: 17/06/2021**
 ----------------------------------
 

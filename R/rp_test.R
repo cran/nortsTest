@@ -3,13 +3,14 @@
 #' Performs the random projection test for normality. The null hypothesis (H0) is that the given data
 #' follows a stationary Gaussian process, and k is the number of used random projections.
 #'
-#' @usage  rp.test(y,k = 64,FDR = TRUE,pars1 = c(100,1),pars2  = c(2,7),seed = NULL)
+#' @usage  rp.test(y,k = 16,FDR = TRUE,pars1 = c(100,1),pars2  = c(2,7),seed = NULL)
 #'
 #' @param y a numeric vector or an object of the \code{ts} class containing a stationary time series.
 #' @param k an integer with the number of random projections to be used, by default
-#' \code{k = 2}.
+#' \code{k = 16}.
 #' @param FDR a logical value for mixing the p-values using a dependent False discovery
-#' rate method. By default \code{FDR = TRUE}.
+#' rate method. If \code{FDR =TRUE}, then the p-values are mixed using a False discovery Rate method,
+#' on the contrary it applies the Benjamin and Yekuteli (2001) procedure.  By default \code{FDR = TRUE}.
 #' @param pars1 an optional real vector with the shape parameters of the beta distribution
 #' used for the odd number random projection. By default, \code{pars1 = c(100,1)} where,
 #' \code{shape1 = 100} and \code{shape2 = 1}.
@@ -33,8 +34,8 @@
 #' @details
 #' The random projection test generates k independent random projections of the process.
 #' A Lobato and Velasco's test are applied to the first half of the projections, and an
-#' Epps test for the other half. By default, a Monte Carlo p-value estimate is used for
-#' mixing the tests. A False discovery rate can be used for mixing by setting \code{FDR = TRUE}.
+#' Epps test for the other half. Then, a False discovery rate is used for mixing the
+#' obtained p.values
 #'
 #' For generating the k random projections a beta distribution is used. By default a
 #' \code{beta(shape1 = 100,shape = 1)} and a \code{beta(shape1 = 2,shape = 7)} are used
@@ -63,9 +64,9 @@
 #' @examples
 #' # Generating an stationary arma process
 #' y = arima.sim(100,model = list(ar = 0.3))
-#' rp.test(y)
+#' rp.test(y,k = 4)
 #'
-rp.test = function(y,k = 64,FDR = TRUE,pars1 = c(100,1),pars2 = c(2,7),seed = NULL){
+rp.test = function(y,k = 16,FDR = TRUE,pars1 = c(100,1),pars2 = c(2,7),seed = NULL){
 
   if( !is.numeric(y) & !is(y,class2 = "ts") )
     stop("y object must be numeric or a time series")
@@ -91,12 +92,10 @@ rp.test = function(y,k = 64,FDR = TRUE,pars1 = c(100,1),pars2 = c(2,7),seed = NU
   rps = rp.sample(as.numeric(y),k = k,seed = seed,pars1 = pars1,pars2 = pars2)
   F1 = pchisq(q = c(rps$lobato,rps$epps),df = 2,lower.tail = FALSE)
 
-  if(FDR){
+  if(FDR)
     F1 = min(p.adjust(F1,method = "fdr"))
-  }
-  else{
-    F1 = mean(F1)
-  }
+  else
+    F1 = min(p.adjust(F1,method = "BY"))
 
   dname = deparse(substitute(y))
   alt = paste(dname,"does not follow a Gaussian Process")
@@ -124,10 +123,10 @@ rp.test = function(y,k = 64,FDR = TRUE,pars1 = c(100,1),pars2 = c(2,7),seed = NU
 #' using a Lobato and Velasco's statistic test. The last half values with an Epps
 #' statistic test.
 #'
-#' @usage  rp.sample(y,k = 2,pars1 = c(100,1),pars2 = c(2,7),seed = NULL)
+#' @usage  rp.sample(y,k = 16,pars1 = c(100,1),pars2 = c(2,7),seed = NULL)
 #'
 #' @param y a numeric vector or an object of the \code{ts} class containing a stationary time series.
-#' @param k an integer with the number of random projections to be used, by default \code{k = 2}.
+#' @param k an integer with the number of random projections to be used, by default \code{k = 16}.
 #' @param pars1 an optional real vector with the shape parameters of the beta distribution
 #' used for the odd number random projection. By default, \code{pars1 = c(100,1)} where,
 #' \code{shape1 = 100} and \code{shape2 = 1}.
@@ -174,9 +173,9 @@ rp.test = function(y,k = 64,FDR = TRUE,pars1 = c(100,1),pars2 = c(2,7),seed = NU
 #' @examples
 #' # Generating an stationary arma process
 #' y = arima.sim(100,model = list(ar = 0.3))
-#' rp.test(y)
+#' rp.test(y,k = 4)
 #'
-rp.sample = function(y,k = 2,pars1 = c(100,1),pars2 = c(2,7),seed = NULL){
+rp.sample = function(y,k = 16,pars1 = c(100,1),pars2 = c(2,7),seed = NULL){
 
   if( !is.numeric(y) & !is(y,class2 = "ts") )
     stop("y object must be numeric or a time series")
@@ -193,17 +192,15 @@ rp.sample = function(y,k = 2,pars1 = c(100,1),pars2 = c(2,7),seed = NULL){
   n = length(y);T1 = NULL;T2 = NULL
 
   for(j in 1:k){
-    pars = pars2
-    if( j %% 2 == 1) pars = pars1
+    yh1 = random.projection(as.numeric(y),shape1 = pars1[1],shape2 = pars1[2])
+    yh2 = random.projection(as.numeric(y),shape1 = pars2[1],shape2 = pars2[2])
 
-    yh = random.projection(as.numeric(y),shape1 = pars[1],shape2 = pars[2])
+    T1 = c(T1,lobato.statistic(yh1) )
+    T1 = c(T1,lobato.statistic(yh2) )
 
-    if(j <= k/2)
-      T1 = c(T1,lobato.statistic(yh) )
-    else
-      T2 = c(T2,epps.statistic(yh) )
+    T2 = c(T2,epps.statistic(yh1) )
+    T2 = c(T2,epps.statistic(yh2) )
   }
-
   rp.sample = list(lobato = T1,epps = T2)
 
   return(rp.sample)

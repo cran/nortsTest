@@ -1,7 +1,7 @@
 Package: nortsTest
 Title: Assessing Normality of Stationary Process
-Version: 1.0.1
-Date: 2021-06-17
+Version: 1.0.3
+Date: 2021-08-16
 Authors@R: c(
   person("Asael","Alonzo Matamoros", role = c("aut", "cre"),email = "asael.alonzo@gmail.com"),
   person("Alicia","Nieto-Reyes", role = 'aut', email = "alicia.nieto@unican.es"),
@@ -25,7 +25,7 @@ Imports: forecast, nortest, ggplot2, gridExtra, tseries, uroot, MASS,
 Suggests: ggfortify
 URL: https://github.com/asael697/nortsTest
 BugReports: https://github.com/asael697/nortsTest/issues
-Packaged: 2021-06-17 14:30:13 UTC; asael
+Packaged: 2021-08-16 12:01:02 UTC; asael_am
 Author: Asael Alonzo Matamoros [aut, cre],
   Alicia Nieto-Reyes [aut],
   Rob Hyndman [ctb],
@@ -33,4 +33,4 @@ Author: Asael Alonzo Matamoros [aut, cre],
   Trapletti A. [ctb]
 Maintainer: Asael Alonzo Matamoros <asael.alonzo@gmail.com>
 Repository: CRAN
-Date/Publication: 2021-06-17 15:40:02 UTC
+Date/Publication: 2021-08-16 15:30:07 UTC

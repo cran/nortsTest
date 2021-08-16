@@ -4,16 +4,17 @@
 \alias{rp.test}
 \title{The k random projections test for normality}
 \usage{
-rp.test(y,k = 64,FDR = TRUE,pars1 = c(100,1),pars2  = c(2,7),seed = NULL)
+rp.test(y,k = 16,FDR = TRUE,pars1 = c(100,1),pars2  = c(2,7),seed = NULL)
 }
 \arguments{
 \item{y}{a numeric vector or an object of the \code{ts} class containing a stationary time series.}
 
 \item{k}{an integer with the number of random projections to be used, by default
-\code{k = 2}.}
+\code{k = 16}.}
 
 \item{FDR}{a logical value for mixing the p-values using a dependent False discovery
-rate method. By default \code{FDR = TRUE}.}
+rate method. If \code{FDR =TRUE}, then the p-values are mixed using a False discovery Rate method,
+on the contrary it applies the Benjamin and Yekuteli (2001) procedure.  By default \code{FDR = TRUE}.}
 
 \item{pars1}{an optional real vector with the shape parameters of the beta distribution
 used for the odd number random projection. By default, \code{pars1 = c(100,1)} where,
@@ -45,8 +46,8 @@ follows a stationary Gaussian process, and k is the number of used random projec
 \details{
 The random projection test generates k independent random projections of the process.
 A Lobato and Velasco's test are applied to the first half of the projections, and an
-Epps test for the other half. By default, a Monte Carlo p-value estimate is used for
-mixing the tests. A False discovery rate can be used for mixing by setting \code{FDR = TRUE}.
+Epps test for the other half. Then, a False discovery rate is used for mixing the
+obtained p.values
 
 For generating the k random projections a beta distribution is used. By default a
 \code{beta(shape1 = 100,shape = 1)} and a \code{beta(shape1 = 2,shape = 7)} are used
@@ -58,7 +59,7 @@ The test was proposed by \emph{Nieto-Reyes, A.,Cuesta-Albertos, J. & Gamboa, F. 
 \examples{
 # Generating an stationary arma process
 y = arima.sim(100,model = list(ar = 0.3))
-rp.test(y)
+rp.test(y,k = 4)
 
 }
 \references{
