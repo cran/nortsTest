@@ -2,38 +2,48 @@
 % Please edit documentation in R/vavra_test.R
 \name{vavra.test}
 \alias{vavra.test}
-\title{The Psaradakis and  Vavra test for normality}
+\title{The Psaradakis and  Vávra test for normality.}
 \usage{
-vavra.test(y,reps = 1000,h = 100,seed = NULL)
+vavra.test(y, normality = c("ad","lobato","jb","cvm","epps"),
+                  reps = 1000, h = 100, seed = NULL, c = 1, lambda = c(1,2))
 }
 \arguments{
-\item{y}{a numeric vector or an object of the \code{ts} class containing a stationary time series.}
+\item{y}{a numeric vector or an object of the \code{ts} class containing a
+stationary time series.}
+
+\item{normality}{A character string naming the desired test for checking
+normality. Valid values are \code{"epps"} for the Epps, \code{"lobato"} for
+Lobato and Velasco's, \code{"jb"} for the Jarque and Bera, \code{"ad"} for
+Anderson Darling test, and \code{"cvm"} for the Cramer Von Mises' test.
+The default value is \code{"ad"} test.}
 
 \item{reps}{an integer with the total bootstrap repetitions.}
 
 \item{h}{an integer with the first \code{burn-in} sieve bootstrap replicates.}
 
 \item{seed}{An optional \code{\link[=set.seed]{seed}} to use.}
+
+\item{c}{a positive real value used as argument for the Lobato's test.}
+
+\item{lambda}{a numeric vector used as argument for the Epps's test.}
 }
 \value{
-a h.test class with the main results of the Epps hypothesis test. The
-h.test class have the following values:
-\itemize{
- \item{"bootstrap A"}{The sieve bootstrap A statistic}
- \item{"p.value"}{The p value}
- \item{"alternative"}{The alternative hypothesis}
- \item{"method"}{The used method}
- \item{"data.name"}{The data name.}
-}
+A list with class \code{"h.test"} containing the following components:
+ \item{statistic:}{the sieve bootstrap A statistic.}
+ \item{p.value:}{the p value for the test.}
+ \item{alternative:}{a character string describing the alternative hypothesis.}
+ \item{method:}{a character string \dQuote{Psaradakis and Vávra test}.}
+ \item{data.name:}{a character string giving the name of the data.}
 }
 \description{
-Performs the Psaradakis and Vavra distance test for normality. The null hypothesis (H0),
-is that the given data follows a Gaussian process.
+Performs the Psaradakis and Vávra distance test for normality. The null
+hypothesis (H0), is that the given data follows a Gaussian process.
 }
 \details{
-The Psaradakis and Vavra test approximates the empirical distribution
+The Psaradakis and Vávra test approximates the empirical distribution
 function of the Anderson Darling's statistic, using a sieve bootstrap
-approximation. The test was proposed by \emph{Psaradakis, Z. & Vavra, M (20.17)}.
+approximation. The test was proposed by \emph{Psaradakis, Z. & Vávra, M.
+(20.17)}.
 }
 \examples{
 # Generating an stationary arma process
@@ -42,14 +52,18 @@ vavra.test(y)
 
 }
 \references{
-Psaradakis, Z. & Vavra, M. (2017). A distance test of normality for a wide class
+Psaradakis, Z. and Vávra, M. (2020) Normality tests for dependent
+data: large-sample and bootstrap approaches. Communications in
+\emph{Statistics-Simulation and Computation 49 (2)}. ISSN 0361-0918.
+
+Psaradakis, Z. & Vávra, M. (2017). A distance test of normality for a wide class
 of stationary process. \emph{Journal of Econometrics and Statistics}. 2, 50-60.
 
 Bulmann, P. (1997). Sieve Bootstrap for time series. \emph{Bernoulli}.
 3(2), 123 -148.
 }
 \seealso{
-\code{\link{lobato.test}},\code{\link{epps.test}}
+\code{\link{lobato.test}}, \code{\link{epps.test}}
 }
 \author{
 Asael Alonzo Matamoros.

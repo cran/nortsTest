@@ -2,54 +2,57 @@
 % Please edit documentation in R/rp_test.R
 \name{rp.sample}
 \alias{rp.sample}
-\title{Generates a test statistics sample of random projections}
+\title{Generates a test statistics sample of random projections.}
 \usage{
-rp.sample(y,k = 16,pars1 = c(100,1),pars2 = c(2,7),seed = NULL)
+rp.sample(y, k = 1, pars1 = c(100,1), pars2 = c(2,7), seed = NULL)
 }
 \arguments{
-\item{y}{a numeric vector or an object of the \code{ts} class containing a stationary time series.}
+\item{y}{a numeric vector or an object of the \code{ts} class containing a
+stationary time series.}
 
-\item{k}{an integer with the number of random projections to be used, by default \code{k = 16}.}
+\item{k}{an integer that determines the `2k` random projections are used for
+every type of test. The `pars1` argument generates the first `k` projections,
+and `pars2` generates the later `k` projections. By default, \code{k = 1}.}
 
-\item{pars1}{an optional real vector with the shape parameters of the beta distribution
-used for the odd number random projection. By default, \code{pars1 = c(100,1)} where,
-\code{shape1 = 100} and \code{shape2 = 1}.}
+\item{pars1}{an optional real vector with the shape parameters of the beta
+distribution used for the first `k` random projections By default,
+\code{pars1 = c(100,1)} where, \code{shape1 = 100} and \code{shape2 = 1}.}
 
-\item{pars2}{an optional real vector with the shape parameters of the beta distribution
-used for the even number random projection. By default, \code{pars2 = c(2,7)} where,
-\code{shape1 = 2} and \code{shape2 = 7}.}
+\item{pars2}{an optional real vector with the shape parameters of the beta
+distribution used to compute the last `k` random projections. By default,
+\code{pars2 = c(2,7)} where, \code{shape1 = 2} and \code{shape2 = 7}.}
 
 \item{seed}{An optional \code{\link[=set.seed]{seed}} to use.}
 }
 \value{
 A list with 2 real value vectors:
-\itemize{
- \item{"lobato"}{A vector with the Lobato and Velasco's statistics sample}
- \item{"epps"}{A vector with the Epps statistics sample.}
-}
+ \item{lobato:}{A vector with the Lobato and Velasco's statistics sample.}
+ \item{epps:}{A vector with the Epps statistics sample.}
 }
 \description{
-Generates a sample of test statistics using k independent random projections
-of a stationary process. The first half values of the sample, are estimated
-using a Lobato and Velasco's statistic test. The last half values with an Epps
-statistic test.
+Generates a 4k sample of test statistics  projecting the stationary process
+using the random projections procedure.
 }
 \details{
-The \code{rp.sample} function generates k independent random projections of the process.
-A Lobatos and Velasco's test is applied to the first half of the projections. And an
-Epps test for the other half.
+The \code{rp.sample} function generates `4k` tests statistics by projecting
+the time series using `2k` stick breaking processes. First, the function
+samples a stick breaking process using \code{pars1} argument. Then, projects
+the time series using the sampled stick process. Later, applies both the Lobato
+and Velasco's, and the Epps statistics to the obtained projection. Analogously,
+the function performs the three steps using also \code{pars2} argument
 
-For generating the k random projections a beta distribution is used. By default a
-\code{beta(shape1 = 100,shape = 1)} and a \code{beta(shape1 = 2,shape = 7)} are used
-to generate the odd and even projections respectively. For using a different parameter
-set, change \code{pars1} or \code{pars2} values.
+The function uses beta distributions for generating the `2k` random projections.
+By default, uses a \code{beta(shape1 = 100,shape = 1)} distribution contained
+in \code{pars1} argument to generate the first `k` projections. For the later
+`k` projections the functions uses a \code{beta(shape1 = 2,shape = 7)} distribution
+contained in \code{pars2} argument.
 
 The test was proposed by \emph{Nieto-Reyes, A.,Cuesta-Albertos, J. & Gamboa, F. (2014)}.
 }
 \examples{
-# Generating an stationary arma process
+# Generating an stationary ARMA process
 y = arima.sim(100,model = list(ar = 0.3))
-rp.test(y,k = 4)
+rp.sample(y)
 
 }
 \references{
@@ -64,7 +67,7 @@ Lobato, I., & Velasco, C. (2004). A simple test of normality in time series.
 \emph{Journal of econometric theory}. 20(4), 671-689.
 }
 \seealso{
-\code{\link{lobato.test}} \code{\link{epps.test}}
+\code{\link{lobato.test}}, \code{\link{epps.test}}
 }
 \author{
 Alicia Nieto-Reyes and Asael Alonzo Matamoros

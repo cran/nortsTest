@@ -15,16 +15,13 @@ Lm.test(y,lag.max = 2,alpha = 0.05)
 \code{alpha = 0.05} is used.}
 }
 \value{
-a h.test class with the main results of the Lagrage multiplier hypothesis test.
-The h.test class have the following values:
-\itemize{
- \item{"Lm"}{The lagrange multiplier statistic}
- \item{"df"}{The test degrees freedoms}
- \item{"p.value"}{The p value}
- \item{"alternative"}{The alternative hypothesis}
- \item{"method"}{The used method}
- \item{"data.name"}{The data name.}
-}
+A list with class \code{"h.test"} containing the following components:
+ \item{statistic:}{the Lagrange multiplier statistic.}
+ \item{parameter:}{the test degrees freedoms.}
+ \item{p.value:}{the p value.}
+ \item{alternative:}{a character string describing the alternative hypothesis.}
+ \item{method:}{a character string \dQuote{Lagrange Multiplier test}.}
+ \item{data.name:}{a character string giving the name of the data.}
 }
 \description{
 Performs the Lagrange Multipliers test for homoscedasticity in a stationary process.
@@ -56,5 +53,5 @@ Series Analysis.} 4, 269-273.
 \code{\link{arch.test}}
 }
 \author{
-A. Trapletti and Asael Alonzo Matamoros
+A. Trapletti and Asael Alonzo Matamoros.
 }

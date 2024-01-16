@@ -2,40 +2,47 @@
 % Please edit documentation in R/epps_test.R
 \name{epps.test}
 \alias{epps.test}
-\title{The Epps and Pulley Test for normality.}
+\title{The asymptotic Epps and Pulley Test for normality.}
 \usage{
-epps.test(y)
+epps.test(y, lambda = c(1,2))
 }
 \arguments{
-\item{y}{a numeric vector or an object of the \code{ts} class containing a stationary time series.}
+\item{y}{a numeric vector or an object of the \code{ts} class containing a stationary
+time series.}
+
+\item{lambda}{a numeric vector for evaluating the characteristic function. This values
+could be selected by the user for a better test performance. By default, the values
+are `c(1,2)`, another plausible option is to select random values.}
 }
 \value{
-a h.test class with the main results of the Epps hypothesis test. The
-h.test class have the following values:
-\itemize{
- \item{"epps"}{The Epps statistic}
- \item{"df"}{The test degrees freedoms}
- \item{"p.value"}{The p value}
- \item{"alternative"}{The alternative hypothesis}
- \item{"method"}{The used method}
- \item{"data.name"}{The data name.}
-}
+A list with class \code{"h.test"} containing the following components:
+ \item{statistic:}{the Epps statistic.}
+ \item{parameter:}{the test degrees freedoms.}
+ \item{p.value:}{the p value.}
+ \item{alternative:}{a character string describing the alternative hypothesis.}
+ \item{method:}{a character string \dQuote{Epps test}.}
+ \item{data.name:}{a character string giving the name of the data.}
 }
 \description{
-Performs the Epps test for normality. The null hypothesis (H0) is that the given data
-follows a stationary Gaussian process.
+Performs the asymptotic Epps test of normality for univariate time series.
+Computes the p-value using the asymptotic Gamma Distribution.
 }
 \details{
 The Epps test minimize the process' empirical characteristic function using a
-quadratic loss in terms of the process two first moments. The test was proposed
-by \emph{Epps, T.W. (1987)} and implemented by \emph{Nieto-Reyes, A.,
-Cuesta-Albertos, J. & Gamboa, F. (2014)} using the \code{amoebam()} function of
-\emph{Press, W.H., Teukolsky, S.A., Vetterling, W.T. and  Flannery, B.P. (2007)}.
+quadratic loss in terms of the process two first moments.  \emph{Nieto-Reyes, A.,
+Cuesta-Albertos, J. & Gamboa, F. (2014)} upgrade the test implementation by
+allowing the option of evaluating the characteristic function with random values.
+The \code{amoebam()} function of \emph{Press, W.H., Teukolsky, S.A., Vetterling,
+W.T. and  Flannery, B.P. (2007)}, performs the optimal search.
 }
 \examples{
 # Generating an stationary arma process
 y = arima.sim(100,model = list(ar = 0.3))
 epps.test(y)
+
+# Epps tests with random lambda values
+y = arima.sim(100,model = list(ar = c(0.3,0.2)))
+epps.test(y, lambda = rnorm(2,mean = 1,sd = 0.1))
 
 }
 \references{

@@ -4,7 +4,7 @@
 \alias{seasonal.test}
 \title{The Seasonal unit root tests function}
 \usage{
-seasonal.test(y,seasonal = c("ocsb","ch","hegy"),alpha = 0.05)
+seasonal.test(y, seasonal = c("ocsb","ch","hegy"), alpha = 0.05)
 }
 \arguments{
 \item{y}{a numeric vector or an object of the \code{ts} class containing a stationary time series.}
@@ -18,7 +18,13 @@ Canova and Hansen, and \code{"hegy"} for Hylleberg, Engle, Granger, and Yoo. The
 is used}
 }
 \value{
-a h.test class with the main results of unit root hypothesis test.
+A list with class \code{"h.test"} containing the following components:
+ \item{statistic:}{the test statistic.}
+ \item{parameter:}{the test degrees freedoms.}
+ \item{p.value:}{the p-value for the test.}
+ \item{alternative:}{a character string describing the alternative hypothesis.}
+ \item{method:}{a character string with the test name.}
+ \item{data.name:}{a character string giving the name of the data.}
 }
 \description{
 Perform a seasonal unit root test to check seasonality in a linear stochastic process
@@ -49,7 +55,7 @@ Hylleberg, S., Engle, R., Granger, C. & Yoo, B. (1990). Seasonal integration
 and cointegration. \emph{Journal of Econometrics} 44(1), 215-238.
 }
 \seealso{
-\code{\link{normal.test}},\code{\link{uroot.test}}
+\code{\link{normal.test}}, \code{\link{uroot.test}}
 }
 \author{
 Asael Alonzo Matamoros

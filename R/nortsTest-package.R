@@ -1,4 +1,4 @@
-#' 'Assessing Normality of Stationary Process.'
+#' 'Assessing Normality of a Stationary Process.'
 #'
 #' @docType package
 #' @name nortsTest-package
@@ -7,21 +7,26 @@
 #' @description
 #' Despite that several tests for normality in stationary processes have been proposed
 #' in the literature, consistent implementations of these tests in programming languages
-#' are limited. Four normality test are implemented. The Lobato and Velasco's, Epps,
-#' Psaradakis and  Vavra, and the random projections tests for stationary process.
-#' Some other diagnostics such as, unit root test for stationarity, seasonal tests for
-#' seasonality, and arch effect test for volatility; are also performed. The package also
-#' offers residual diagnostic for linear time series models developed in several packages.
+#' are limited.Seven normality test are implemented. The asymptotic Lobato and Velasco's,
+#' asymptotic Epps, Psaradakis and  Vávra, Lobato and Velasco's sieve bootstrap approximation,
+#' El bouch et al., Epps sieve bootstrap approximation and the random projections tests
+#' for univariate stationary process. Some other diagnostics such as, unit root test for
+#' stationarity, seasonal tests for seasonality, and arch effect test for volatility; are
+#' also performed. Additionally, the El bouch test performs normality tests for bivariate
+#' time series. The package also offers residual diagnostic for linear time series models
+#' developed in several packages.
 #'
 #' @details
-#' We present four main functions, for testing the hypothesis of
-#' normality in stationary process, the \code{epps.test}, \code{lobato.test},
-#' \code{rp.test}, and \code{varvra.test}. Additionally, we provide functions
-#' for unit root, seasonality and ARCH effects tests for stationary, and other additional
-#' methods for visual checks using the \pkg{ggplot2} and \pkg{forecast} packages.
+#' We present several functions for testing the hypothesis of normality in
+#' univariate stationary processes, the \code{epps.test}, \code{lobato.test},
+#' \code{rp.test}, \code{lobato-bootstrap.test}, \code{epps-bootstrap.test},
+#' \code{elbouch.test}, and \code{varvra.test}. Additionally, the \code{elbouch.test}
+#' function performs a bivariate normality test when the user provides a second
+#' time series. For model diagnostics, we provide functions for unit root, seasonality
+#' and ARCH effects tests for stationary, and other methods for visual checks using the
+#' \pkg{ggplot2} and \pkg{forecast} packages.
 #'
 #' @import methods ggplot2 gridExtra forecast nortest stats tseries uroot MASS
-#'
 #'
 #' @references
 #' Epps, T.W. (1987). Testing that a stationary time series is Gaussian. \emph{The
@@ -31,7 +36,7 @@
 #' \emph{Journal of econometric theory}. 20(4), 671-689.
 #' \code{doi:https://doi.org/10.1017/S0266466604204030}.
 #'
-#' Psaradakis, Z. & Vavra, M. (2017). A distance test of normality for a wide class
+#' Psaradakis, Z. & Vávra, M. (2017). A distance test of normality for a wide class
 #' of stationary process. \emph{Journal of Econometrics and Statistics}. 2, 50-60.
 #' \code{doi:https://doi.org/10.1016/j.ecosta.2016.11.005}
 #'

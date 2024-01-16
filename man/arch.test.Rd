@@ -4,7 +4,7 @@
 \alias{arch.test}
 \title{The ARCH effect test function.}
 \usage{
-arch.test(y,arch = c("box","Lm"),alpha = 0.05,lag.max = 2)
+arch.test(y, arch = c("box","Lm"), alpha = 0.05, lag.max = 2)
 }
 \arguments{
 \item{y}{a numeric vector or an object of the \code{ts} class containing a stationary time series.}
@@ -19,7 +19,13 @@ is used}
 \item{lag.max}{an integer with the number of used lags.}
 }
 \value{
-a h.test class with the main results of unit root hypothesis test.
+A list with class \code{"h.test"} containing the following components:
+ \item{statistic:}{the test statistic.}
+ \item{parameter:}{the test degrees freedoms.}
+ \item{p.value:}{the p-value for the test.}
+ \item{alternative:}{a character string describing the alternative hypothesis.}
+ \item{method:}{a character string with the test name.}
+ \item{data.name:}{a character string giving the name of the data.}
 }
 \description{
 Performs the Pormanteau Q and Lagrange Multipliers test for homoscedasticity in  a univariate
@@ -50,7 +56,7 @@ Models Using Squared-Residual Auto-correlations. \emph{Journal of Time
 Series Analysis.} 4, 269-273.
 }
 \seealso{
-\code{\link{normal.test}},\code{\link{seasonal.test}},\code{\link{uroot.test}}
+\code{\link{normal.test}}, \code{\link{seasonal.test}}, \code{\link{uroot.test}}
 }
 \author{
 Asael Alonzo Matamoros

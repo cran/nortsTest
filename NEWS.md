@@ -1,6 +1,37 @@
 **Packages NEWS and Updates**
 ============
 
+**nortsTest 1.1.0 Date: 16/01/2024**
+----------------------------------
+
+### Features:
+- Add initial values as an argument to the Epps and Pulley test.
+= Add the bivariate `elbouch.test()`.
+- Add the `lobato-bootstrap.test()`.
+- Add the `epps-bootstrap.test()`.
+- Add the `jb-bootstrap.test()`.
+- Add the `shapiro-bootstrap.test()`.
+- Add the `cvm-bootstrap.test()`.
+- Add unit testing for a better debug practices.
+
+
+### Fixes:
+- Update documentation for `Lobato`, `RP`, `Epps`, and `Vavra` tests. Better description 
+  to the return value, having a similar formatting to the `t.test()` function. 
+- Update documentation for `normal.test`, `seasonal.test`, and `uroot.test`. Better 
+  description to the return value, having a similar formatting to the `t.test()` function.
+- Fix the htest print method for the random projections test. The function does not print
+  the average Epps and Lobato's statistics.
+
+### Changes:
+- Use Hochberg's False discovery rate method as default to mix p.values, when applying the `rp.test()`. 
+- Refactor the `lobato.statistic()` using less `for` loops.
+- Refactor the `epps.statistic()` using less `for` loops. 
+- Speed up `vavra.test()` and `rp.test()` by replacing for loops with parallel vectorized 
+  computation.
+
+----------------------------------
+
 **nortsTest 1.0.3 Date: 12/06/2021**
 ----------------------------------
 
@@ -11,7 +42,7 @@
 ### Fixes:
 - Fix documentation.
 - Update p-values mixing method using a False discovery rates, and Benjamin and 
-  Yekuteli (2001) procedures.
+  Yekutieli (2001) procedures.
 - update the random projections procedure for the rp.test.
 
 ----------------------------------
@@ -57,11 +88,11 @@
 
 ### Features:
 
-- vavra.test() function for the Psaradaki and Vavra test.
+- vavra.test() function for the Psaradakis and Vávra test.
 
 - sieve.bootstrap() function for bootstrap sub-sample in stationary time series.
 
-- vavra.sample() function for the Anderson Darling sample statistics for the Psaradaki and Vavra test.
+- vavra.sample() function for the Anderson Darling sample statistics for the Psaradakis and Vávra test.
 
 - rp.test() function for the random projections test.
 
@@ -81,11 +112,11 @@
 
 - plot.compare() function deleted
 
-- epps.statistic() using the **poweR** package deleted.
+- epps.statistic() using the **PoweR** package deleted.
 
 ### Fixes:
 
--   The amoebam algorithm for epps.statistc() is corrected.
+-   The amoebam algorithm for epps.statistic() is corrected.
 
 
 **normality 0.0.1.000 Date: 12/03/2020**
@@ -119,7 +150,7 @@
 
 ### Fixes:
 
--   The amoebam algorithm for Epps.statistc() is changed for the one implemented by the **PoweR** package
+-   The amoebam algorithm for Epps.statistic() is changed for the one implemented by the **PoweR** package
 
 
 **normality 0.0.1.000 Date: 23/10/2020**

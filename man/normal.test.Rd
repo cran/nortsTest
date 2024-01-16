@@ -4,7 +4,7 @@
 \alias{normal.test}
 \title{The normality test for stationary process}
 \usage{
-normal.test(y,normality = c("epps","lobato","vavra","rp","jb","ad","shapiro"),
+normal.test(y, normality = c("epps","lobato","vavra","rp","jb","ad","shapiro"),
                     alpha = 0.05)
 }
 \arguments{
@@ -12,22 +12,26 @@ normal.test(y,normality = c("epps","lobato","vavra","rp","jb","ad","shapiro"),
 
 \item{normality}{A character string naming the desired test for checking normality. Valid values are
 \code{"epps"} for the Epps, \code{"lobato"} for Lobato and Velasco's,\code{"vavra"} for the Psaradakis
-and  Vavra, \code{"rp"} for the random projections, \code{"jb"} for the Jarque and Beras, \code{"ad"}
+and  Vávra, \code{"rp"} for the random projections, \code{"jb"} for the Jarque and Bera, \code{"ad"}
 for Anderson Darling test, and \code{"shapiro"} for the Shapiro-Wilk's test. The default value is
 \code{"epps"} test.}
 
-\item{alpha}{Level of the test, possible values range from 0.01 to 0.1. By default \code{alpha = 0.05}
-is used.}
+\item{alpha}{Level of the test, possible values range from 0.01 to 0.1. By default \code{alpha = 0.05}}
 }
 \value{
-An h.test class with the main results of normal hypothesis test.
+A list with class \code{"h.test"} containing the following components:
+ \item{statistic:}{the test statistic.}
+ \item{parameter:}{the test degrees freedoms.}
+ \item{p.value:}{the p-value for the test.}
+ \item{alternative:}{a character string describing the alternative hypothesis.}
+ \item{method:}{a character string with the test name.}
+ \item{data.name:}{a character string giving the name of the data.}
 }
 \description{
 Perform a normality test. The null hypothesis (H0) is that the given data
 follows a stationary Gaussian process.
 }
 \details{
-Several different tests are available:
 \code{"lobato"}, \code{"epps"}, \code{"vavras"} and \code{"rp"} test are for testing normality
 in stationary process. \code{"jb"}, \code{"ad"}, and  \code{"shapiro"} tests are for numeric data.
 In all cases, the alternative hypothesis is that \code{y} follows a Gaussian process. By default,
@@ -35,16 +39,16 @@ In all cases, the alternative hypothesis is that \code{y} follows a Gaussian pro
 }
 \examples{
 #  stationary  ar process
-y = arima.sim(100,model = list(ar = 0.3))
+y = arima.sim(100, model = list(ar = 0.3))
 normal.test(y) # epps test
 
 # normal random sample
 y = rnorm(100)
-normal.test(y,normality = "shapiro")
+normal.test(y, normality = "shapiro")
 
 # exponential random sample
 y = rexp(100)
-normal.test(y,normality = "ad")
+normal.test(y, normality = "ad")
 
 }
 \references{
@@ -54,7 +58,7 @@ Annals of Statistic}. 15(4), 1683-1698.
 Lobato, I., & Velasco, C. (2004). A simple test of normality in time series.
 \emph{Journal of econometric theory}. 20(4), 671-689.
 
-Psaradakis, Z. & Vavra, M. (2017). A distance test of normality for a wide class
+Psaradakis, Z. & Vávra, M. (2017). A distance test of normality for a wide class
 of stationary process. \emph{Journal of Econometrics and Statistics}. 2, 50-60.
 
 Nieto-Reyes, A., Cuesta-Albertos, J. & Gamboa, F. (2014). A random-projection
@@ -69,7 +73,7 @@ Cromwell, J. B., Labys, W. C. & Terraza, M. (1994). Univariate Tests for
 Time Series Models. \emph{Sage, Thousand Oaks, CA}. 20-22.
 }
 \seealso{
-\code{\link{uroot.test}},\code{\link{seasonal.test}}
+\code{\link{uroot.test}}, \code{\link{seasonal.test}}
 }
 \author{
 Asael Alonzo Matamoros

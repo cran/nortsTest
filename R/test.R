@@ -1,18 +1,24 @@
-#' The Unit root tests function
+#' The Unit root tests function.
 #'
-#' Perform a unit root test to check stationarity in a linear stochastic process.
+#' Perform a unit root test to check stationary in a linear stochastic process.
 #'
-#' @usage  uroot.test(y,unit_root = c("adf","kpss","pp","box"),alpha = 0.05)
+#' @usage uroot.test(y, unit_root = c("adf","kpss","pp","box"), alpha = 0.05)
 #'
 #' @param y a numeric vector or an object of the \code{ts} class containing a stationary time series.
-#' @param unit_root A character string naming the desired unit root test for checking stationarity.
+#' @param unit_root A character string naming the desired unit root test for checking stationary.
 #' Valid values are \code{"adf"} for the Augmented Dickey-Fuller, \code{"pp"} for the Phillips-Perron,
 #' \code{"kpss"} for Kwiatkowski, Phillips, Schmidt, and Shin, and \code{"box"} for the Ljung-Box. The default
 #' value is \code{"adf"} for the Augmented Dickey-Fuller test.
 #' @param alpha Level of the test, possible values range from 0.01 to 0.1. By default \code{alpha = 0.05}
-#' is used
+#' is used.
 #'
-#' @return a h.test class with the main results of unit root hypothesis test.
+#' @return A list with class \code{"h.test"} containing the following components:
+#'  \item{statistic:}{the test statistic.}
+#'  \item{parameter:}{the test degrees freedoms.}
+#'  \item{p.value:}{the p-value for the test.}
+#'  \item{alternative:}{a character string describing the alternative hypothesis.}
+#'  \item{method:}{a character string with the test name.}
+#'  \item{data.name:}{a character string giving the name of the data.}
 #'
 #' @details Several different tests are available:
 #' In the  \code{kpss} test, the null hypothesis that \code{y} has a stationary root
@@ -24,9 +30,9 @@
 #' @importFrom stats Box.test
 #' @export
 #'
-#' @author Asael Alonzo Matamoros and A. Trapletti
+#' @author Asael Alonzo Matamoros and A. Trapletti.
 #'
-#' @seealso \code{\link{normal.test}},\code{\link{seasonal.test}}
+#' @seealso \code{\link{normal.test}}, \code{\link{seasonal.test}}
 #'
 #' @references
 #' Dickey, D. & Fuller, W. (1979). Distribution of the Estimators for
@@ -50,9 +56,9 @@
 #'
 #' # a random walk process
 #' y = cumsum(y)
-#' uroot.test(y,unit_root = "pp")
+#' uroot.test(y, unit_root = "pp")
 #'
-uroot.test = function(y,unit_root = c("adf","kpss","pp","box"),alpha = 0.05){
+uroot.test = function(y, unit_root = c("adf","kpss","pp","box"), alpha = 0.05){
 
   if( !is.numeric(y) & !is(y,class2 = "ts") )
     stop("y object must be numeric or a time series")
@@ -107,21 +113,26 @@ uroot.test = function(y,unit_root = c("adf","kpss","pp","box"),alpha = 0.05){
 #' Perform a normality test. The null hypothesis (H0) is that the given data
 #' follows a stationary Gaussian process.
 #'
-#' @usage  normal.test(y,normality = c("epps","lobato","vavra","rp","jb","ad","shapiro"),
+#' @usage normal.test(y, normality = c("epps","lobato","vavra","rp","jb","ad","shapiro"),
 #'                     alpha = 0.05)
 #'
 #' @param y a numeric vector or an object of the \code{ts} class containing a stationary time series.
 #' @param normality A character string naming the desired test for checking normality. Valid values are
 #' \code{"epps"} for the Epps, \code{"lobato"} for Lobato and Velasco's,\code{"vavra"} for the Psaradakis
-#' and  Vavra, \code{"rp"} for the random projections, \code{"jb"} for the Jarque and Beras, \code{"ad"}
+#' and  Vávra, \code{"rp"} for the random projections, \code{"jb"} for the Jarque and Bera, \code{"ad"}
 #' for Anderson Darling test, and \code{"shapiro"} for the Shapiro-Wilk's test. The default value is
 #' \code{"epps"} test.
 #' @param alpha Level of the test, possible values range from 0.01 to 0.1. By default \code{alpha = 0.05}
-#' is used.
 #'
-#' @return An h.test class with the main results of normal hypothesis test.
+#' @return A list with class \code{"h.test"} containing the following components:
+#'  \item{statistic:}{the test statistic.}
+#'  \item{parameter:}{the test degrees freedoms.}
+#'  \item{p.value:}{the p-value for the test.}
+#'  \item{alternative:}{a character string describing the alternative hypothesis.}
+#'  \item{method:}{a character string with the test name.}
+#'  \item{data.name:}{a character string giving the name of the data.}
 #'
-#' @details Several different tests are available:
+#' @details
 #' \code{"lobato"}, \code{"epps"}, \code{"vavras"} and \code{"rp"} test are for testing normality
 #' in stationary process. \code{"jb"}, \code{"ad"}, and  \code{"shapiro"} tests are for numeric data.
 #' In all cases, the alternative hypothesis is that \code{y} follows a Gaussian process. By default,
@@ -132,9 +143,9 @@ uroot.test = function(y,unit_root = c("adf","kpss","pp","box"),alpha = 0.05){
 #' @importFrom nortest ad.test
 #' @export
 #'
-#' @author  Asael Alonzo Matamoros
+#' @author Asael Alonzo Matamoros
 #'
-#' @seealso \code{\link{uroot.test}},\code{\link{seasonal.test}}
+#' @seealso \code{\link{uroot.test}}, \code{\link{seasonal.test}}
 #'
 #' @references
 #' Epps, T.W. (1987). Testing that a stationary time series is Gaussian. \emph{The
@@ -143,7 +154,7 @@ uroot.test = function(y,unit_root = c("adf","kpss","pp","box"),alpha = 0.05){
 #' Lobato, I., & Velasco, C. (2004). A simple test of normality in time series.
 #' \emph{Journal of econometric theory}. 20(4), 671-689.
 #'
-#' Psaradakis, Z. & Vavra, M. (2017). A distance test of normality for a wide class
+#' Psaradakis, Z. & Vávra, M. (2017). A distance test of normality for a wide class
 #' of stationary process. \emph{Journal of Econometrics and Statistics}. 2, 50-60.
 #'
 #' Nieto-Reyes, A., Cuesta-Albertos, J. & Gamboa, F. (2014). A random-projection
@@ -159,18 +170,18 @@ uroot.test = function(y,unit_root = c("adf","kpss","pp","box"),alpha = 0.05){
 #'
 #' @examples
 #' #  stationary  ar process
-#' y = arima.sim(100,model = list(ar = 0.3))
+#' y = arima.sim(100, model = list(ar = 0.3))
 #' normal.test(y) # epps test
 #'
 #' # normal random sample
 #' y = rnorm(100)
-#' normal.test(y,normality = "shapiro")
+#' normal.test(y, normality = "shapiro")
 #'
 #' # exponential random sample
 #' y = rexp(100)
-#' normal.test(y,normality = "ad")
+#' normal.test(y, normality = "ad")
 #'
-normal.test = function(y,normality = c("epps","lobato","vavra","rp","jb","ad","shapiro"),
+normal.test = function(y, normality = c("epps","lobato","vavra","rp","jb","ad","shapiro"),
                        alpha = 0.05){
 
   if( !is.numeric(y) & !is(y,class2 = "ts") )
@@ -246,7 +257,7 @@ normal.test = function(y,normality = c("epps","lobato","vavra","rp","jb","ad","s
 #'
 #' Perform a seasonal unit root test to check seasonality in a linear stochastic process
 #'
-#' @usage  seasonal.test(y,seasonal = c("ocsb","ch","hegy"),alpha = 0.05)
+#' @usage seasonal.test(y, seasonal = c("ocsb","ch","hegy"), alpha = 0.05)
 #'
 #' @param y a numeric vector or an object of the \code{ts} class containing a stationary time series.
 #' @param seasonal A character string naming the desired seasonal unit root test for checking seasonality.
@@ -256,7 +267,13 @@ normal.test = function(y,normality = c("epps","lobato","vavra","rp","jb","ad","s
 #' @param alpha Level of the test, possible values range from 0.01 to 0.1. By default \code{alpha = 0.05}
 #' is used
 #'
-#' @return a h.test class with the main results of unit root hypothesis test.
+#' @return A list with class \code{"h.test"} containing the following components:
+#'  \item{statistic:}{the test statistic.}
+#'  \item{parameter:}{the test degrees freedoms.}
+#'  \item{p.value:}{the p-value for the test.}
+#'  \item{alternative:}{a character string describing the alternative hypothesis.}
+#'  \item{method:}{a character string with the test name.}
+#'  \item{data.name:}{a character string giving the name of the data.}
 #'
 #' @details Several different tests are available:
 #' In the  \code{kpss} test, the null hypothesis that \code{y} has a stationary root
@@ -268,9 +285,9 @@ normal.test = function(y,normality = c("epps","lobato","vavra","rp","jb","ad","s
 #' @importFrom forecast ocsb.test
 #' @export
 #'
-#' @author  Asael Alonzo Matamoros
+#' @author Asael Alonzo Matamoros
 #'
-#' @seealso \code{\link{normal.test}},\code{\link{uroot.test}}
+#' @seealso \code{\link{normal.test}}, \code{\link{uroot.test}}
 #'
 #' @references
 #' Osborn, D., Chui, A., Smith, J., & Birchenhall, C. (1988). Seasonality and the
@@ -289,7 +306,7 @@ normal.test = function(y,normality = c("epps","lobato","vavra","rp","jb","ad","s
 #' y = ts(rnorm(100),frequency = 6)
 #' seasonal.test(y)
 #'
-seasonal.test = function(y,seasonal = c("ocsb","ch","hegy"),alpha = 0.05){
+seasonal.test = function(y, seasonal = c("ocsb","ch","hegy"), alpha = 0.05){
 
   if( !is.numeric(y) & !is(y,class2 = "ts") )
     stop("y object must be numeric or a time series")
@@ -335,7 +352,7 @@ seasonal.test = function(y,seasonal = c("ocsb","ch","hegy"),alpha = 0.05){
 #' Performs the Pormanteau Q and Lagrange Multipliers test for homoscedasticity in  a univariate
 #' stationary process. The null hypothesis (H0), is that the process is homoscedastic.
 #'
-#' @usage  arch.test(y,arch = c("box","Lm"),alpha = 0.05,lag.max = 2)
+#' @usage arch.test(y, arch = c("box","Lm"), alpha = 0.05, lag.max = 2)
 #'
 #' @param y a numeric vector or an object of the \code{ts} class containing a stationary time series.
 #' @param arch A character string naming the desired  test for checking stationarity. Valid values are
@@ -345,7 +362,13 @@ seasonal.test = function(y,seasonal = c("ocsb","ch","hegy"),alpha = 0.05){
 #' @param alpha Level of the test, possible values range from 0.01 to 0.1. By default \code{alpha = 0.05}
 #' is used
 #'
-#' @return a h.test class with the main results of unit root hypothesis test.
+#' @return A list with class \code{"h.test"} containing the following components:
+#'  \item{statistic:}{the test statistic.}
+#'  \item{parameter:}{the test degrees freedoms.}
+#'  \item{p.value:}{the p-value for the test.}
+#'  \item{alternative:}{a character string describing the alternative hypothesis.}
+#'  \item{method:}{a character string with the test name.}
+#'  \item{data.name:}{a character string giving the name of the data.}
 #'
 #' @details Several different tests are available:
 #' Performs Portmanteau Q and Lagrange Multiplier tests for the null hypothesis that the residuals of
@@ -358,9 +381,9 @@ seasonal.test = function(y,seasonal = c("ocsb","ch","hegy"),alpha = 0.05){
 #' @importFrom stats Box.test
 #' @export
 #'
-#' @author  Asael Alonzo Matamoros
+#' @author Asael Alonzo Matamoros
 #'
-#' @seealso \code{\link{normal.test}},\code{\link{seasonal.test}},\code{\link{uroot.test}}
+#' @seealso \code{\link{normal.test}}, \code{\link{seasonal.test}}, \code{\link{uroot.test}}
 #'
 #' @references
 #' Engle, R. F. (1982). Auto-regressive Conditional Heteroscedasticity
@@ -376,7 +399,7 @@ seasonal.test = function(y,seasonal = c("ocsb","ch","hegy"),alpha = 0.05){
 #' y = arima.sim(100,model = list(ar = 0.3))
 #' arch.test(y)
 #'
-arch.test = function(y,arch = c("box","Lm"),alpha = 0.05,lag.max = 2){
+arch.test = function(y, arch = c("box","Lm"), alpha = 0.05, lag.max = 2){
 
   if( !is.numeric(y) & !is(y,class2 = "ts") )
     stop("y object must be numeric or a time series")

@@ -2,7 +2,7 @@
 % Please edit documentation in R/lobato_test.R
 \name{lobato.test}
 \alias{lobato.test}
-\title{The Lobato and Velasco's Test for normality}
+\title{The asymptotic Lobato and Velasco's Test for normality.}
 \usage{
 lobato.test(y,c = 1)
 }
@@ -13,20 +13,17 @@ lobato.test(y,c = 1)
 cumulative sum.}
 }
 \value{
-A h.test class with the main results of the Lobato and Velasco's hypothesis test. The
-h.test class have the following values:
-\itemize{
- \item{"lobato"}{The Lobato and Velasco's statistic}
- \item{"df"}{The test degrees freedoms}
- \item{"p.value"}{The p value}
- \item{"alternative"}{The alternative hypothesis}
- \item{"method"}{The used method}
- \item{"data.name"}{The data name.}
-}
+A list with class \code{"h.test"} containing the following components:
+ \item{statistic:}{the Lobato and Velasco's statistic.}
+ \item{parameter:}{the test degrees freedoms.}
+ \item{p.value:}{the p-value for the test.}
+ \item{alternative:}{a character string describing the alternative hypothesis.}
+ \item{method:}{a character string \dQuote{Lobato and Velasco's test}.}
+ \item{data.name:}{a character string giving the name of the data.}
 }
 \description{
-Performs the Lobato and Velasco's test for normality. The null hypothesis (H0),
-is that the given data follows a Gaussian process.
+Performs the asymptotic Lobato and Velasco's test of normality for univariate time series.
+Computes the p-value using the asymptotic Gamma Distribution.
 }
 \details{
 This test  proves a normality assumption in correlated data employing the
