@@ -1,12 +1,23 @@
 **Packages NEWS and Updates**
 ============
 
+**nortsTest 1.1.1 Date: 23/01/2024**
+----------------------------------
+
+### Fixes:
+
+- use cowplot package for the check_residuals plot function.
+- Update `rejection_rate` and `rejection_table` functions to be more efficient.
+- Increase time compilation checks for test-performance to 30s and test-basics to 15s.
+- change the `rp.sample` function. It computes 2k projections and apply
+ `epp.statistic` to odd projections and `lobato.statistics` to the even ones.
+
 **nortsTest 1.1.0 Date: 16/01/2024**
 ----------------------------------
 
 ### Features:
 - Add initial values as an argument to the Epps and Pulley test.
-= Add the bivariate `elbouch.test()`.
+- Add the bivariate `elbouch.test()`.
 - Add the `lobato-bootstrap.test()`.
 - Add the `epps-bootstrap.test()`.
 - Add the `jb-bootstrap.test()`.
