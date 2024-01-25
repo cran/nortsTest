@@ -1,6 +1,6 @@
-3f22675574d0337cf681f59167088512 *DESCRIPTION
+ef69acc24e2885a291ae00e6e40755ce *DESCRIPTION
 d3aebfe699b954f36691a66d2657429d *NAMESPACE
-f0b69da6c1a8b84f419ac4ef152c832b *NEWS.md
+c6d8006cf54f2f9637df99ee160bb4a9 *NEWS.md
 8839e4f160ad52624e98c87f055efd35 *R/Lm_test.R
 a778ade7c4f39470458871951d367708 *R/autoplot.R
 e304530add4aa3cae14c7fdf42cb111c *R/bootstrap_tests.R
@@ -10,9 +10,9 @@ e304530add4aa3cae14c7fdf42cb111c *R/bootstrap_tests.R
 9287460dba0f8a67afaf84075fab4a66 *R/lobato_test.R
 bbc8843e27c753b71b842917137ffb17 *R/nortsTest-package.R
 96000809905fec866c50721beda8a09a *R/rejection_rates.R
-9c4f5b159ab5cc3dbaddc360e247e586 *R/rp_test.R
+6a4e1ecbb0dcbedc7aff205e47de1fc5 *R/rp_test.R
 8ef5ce8a8c6032e15d31c507a95c02b1 *R/test.R
-5447d24f1df9444a28927519012281d4 *R/vavra_test.R
+ca284e66580ebe734e34551f0455a494 *R/vavra_test.R
 9e299e78d04728de195351e378d2bdde *README.md
 6c1ee1cba566a4dac9c8a5692b371418 *man/Lm.test.Rd
 de62e276251ab98eb66f002900da3275 *man/arch.test.Rd

@@ -1,7 +1,7 @@
 Package: nortsTest
 Title: Assessing Normality of Stationary Process
-Version: 1.1.1
-Date: 2024-01-23
+Version: 1.1.2
+Date: 2024-01-25
 Authors@R: c(
   person("Asael","Alonzo Matamoros", role = c("aut", "cre"),email = "asael.alonzo@gmail.com"),
   person("Alicia","Nieto-Reyes", role = 'aut', email = "alicia.nieto@unican.es"),
@@ -21,7 +21,7 @@ Suggests: ggfortify, testthat (>= 3.0.0)
 URL: https://github.com/asael697/nortsTest
 BugReports: https://github.com/asael697/nortsTest/issues
 Config/testthat/edition: 3
-Packaged: 2024-01-24 00:16:02 UTC; asael_am
+Packaged: 2024-01-25 15:48:56 UTC; asael_am
 Author: Asael Alonzo Matamoros [aut, cre],
   Alicia Nieto-Reyes [aut],
   Rob Hyndman [ctb],
@@ -29,4 +29,4 @@ Author: Asael Alonzo Matamoros [aut, cre],
   Trapletti A. [ctb]
 Maintainer: Asael Alonzo Matamoros <asael.alonzo@gmail.com>
 Repository: CRAN
-Date/Publication: 2024-01-24 14:30:03 UTC
+Date/Publication: 2024-01-25 16:50:02 UTC
